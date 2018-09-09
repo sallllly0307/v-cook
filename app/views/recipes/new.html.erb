@@ -1,0 +1,49 @@
+<%= form_tag("/recipes/create", {multipart: true}) do %>
+  <div id="example-basic">
+    <h3>Step1</h3>
+    <section>
+      <p>タイトル</p>
+      <textarea name="title"></textarea>
+    </section>
+    <h3>Step2</h3>
+    <section>
+      <h4>材料</h4>
+      <p>材料名</p>
+      <textarea name="name"></textarea>
+      <p>分量</p>
+      <input name="quantity">
+      <h4>作り方</h4>
+      <p>工程</p>
+      <textarea name="step"></textarea>
+    </section>
+    <h3>Step3</h3>
+    <section>
+      <p>カテゴリを選択</p>
+      <textarea name="category"></textarea>
+      <p>ひとこと</p>
+      <textarea name="comment"></textarea>
+    </section>
+  </div>
+  <script>
+      $("#example-basic").steps({
+          headerTag: "h3",
+          bodyTag: "section",
+          transitionEffect: "slideLeft",
+          autoFocus: true,
+          titleTemplate: "#title#",
+          labels: {
+              next: "次へ",
+              previous: "戻る",
+              finish: "完了！"
+          }
+      });
+  </script>
+    <input type="submit" value="投稿する">
+<% end %>
+
+
+
+
+
+
+

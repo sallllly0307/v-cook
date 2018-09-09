@@ -1,0 +1,11 @@
+<ul>
+  <li><%= link_to("投稿", "/users/#{@user.id}") %></li>
+  <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
+</ul>
+
+<% @likes.each do |like| %>
+  <% recipe = Recipe.find_by(id: like.recipe_id) %>
+  <img src="<%= "/user_images/#{recipe.user.image_name}" %>">
+  <%= link_to(recipe.user.name, "/users/#{recipe.user.id}") %>
+  <%= link_to(recipe.title, "/recipes/#{recipe.id}") %>
+<% end %>

@@ -1,0 +1,5 @@
+<%= form_tag("/recipes/#{@recipe.id}/update") do %>
+  <textarea name="title"><%= @recipe.title %></textarea>
+  <textarea name="comment"><%= @recipe.comment %></textarea>
+  <input type="submit" value="保存">
+<% end %>

@@ -1,0 +1,19 @@
+<% if @recipes %>
+  <% @recipes.each do |recipe| %>
+    <p>
+      <!-- 表示項目追加予定 -->
+      <%= recipe.title %>
+    </p>
+  <% end %>
+<% end %>
+
+<% if @ingredients %>
+  <!-- find_byメソッドではなくwhereメソッドを使えばeach文を使わずに書けそう -->
+  <% @ingredients.each do |ingredient| %>
+    <% @recipes = Recipe.find_by(id: ingredient.recipe_id) %>
+    <p>
+      <!-- 表示項目追加予定 -->
+      <%= @recipes.title %>
+    </p>
+  <% end %>
+<% end %>

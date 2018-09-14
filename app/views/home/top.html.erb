@@ -1,0 +1,31 @@
+<p>キーワードで検索</p>
+<%= form_tag("/recipes/search/index", {method: "post"}) do %>
+  <input type="text" name="search">
+  <input type="submit" value="検索">
+<% end %>
+
+<p>材料で検索</p>
+<%= form_tag("/recipes/search/index", {method: "post"}) do %>
+  <input type="text" name="nameSearch">
+  <input type="submit" value="検索">
+<% end %>
+
+<p>カテゴリーで検索</p>
+<!-- 検索窓ではなく、選択肢を押して検索結果を表示 -->
+<!-- 検索の場合は複数選択有りで良さそう -->
+
+<%= form_tag("/recipes/search/index", {method: "post"}) do %>
+  <p>
+    <input type="radio" name="category" value="ご飯もの">ご飯もの<br>
+    <input type="radio" name="category" value="パン">パン<br>
+    <input type="radio" name="category" value="パスタ">パスタ<br>
+    <input type="radio" name="category" value="サラダ">サラダ<br>
+    <input type="radio" name="category" value="麺類">麺類<br>
+    <input type="radio" name="category" value="おかず">おかず<br>
+    <input type="radio" name="category" value="スープ・汁物">スープ・汁物<br>
+    <input type="radio" name="category" value="もどき料理">もどき料理<br>
+    <input type="radio" name="category" value="お菓子">お菓子<br>
+    <input type="radio" name="category" value="お弁当">お弁当<br>
+  </p>
+  <%= submit_tag '検索' %>
+<% end %>

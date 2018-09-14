@@ -1,25 +1,62 @@
+
 <%= form_tag("/recipes/create", {multipart: true}) do %>
   <div id="example-basic">
     <h3>Step1</h3>
     <section>
       <p>タイトル</p>
       <textarea name="title"></textarea>
+      <p>写真</p>
+      <input type="text" name="top_image_name">
     </section>
     <h3>Step2</h3>
     <section>
+
       <h4>材料</h4>
-      <p>材料名</p>
-      <textarea name="name"></textarea>
-      <p>分量</p>
-      <input name="quantity">
+
+      <div id="list1">
+        <div id="item1">
+          <label for="label1" style="width: 20%">材料：</label>
+          <textarea name="name[]" style="width: 20%"></textarea>
+          <label for="label2" style="width: 20%">分量：</label>
+          <input type="text" name="quantity[]" style="width: 20%">
+          <input type="button" value="＋" class="add1" style="width: 10%">
+          <input type="button" value="－" class="del1" style="width: 10%">
+        </div>
+      </div>
+
       <h4>作り方</h4>
-      <p>工程</p>
-      <textarea name="step"></textarea>
+      <label>かかる時間</label>
+      <input name="minutes">min
+
+      <div id="list2">
+        <div id="item2">
+          <label for="label1" style="width: 20%">作り方：</label>
+          <textarea name="step[]" style="width: 20%"></textarea>
+          <label for="label2" style="width: 20%">写真：</label>
+          <input type="text" name="" style="width: 20%">
+          <input type="button" value="＋" class="add2" style="width: 10%">
+          <input type="button" value="－" class="del2" style="width: 10%">
+        </div>
+      </div>
+
     </section>
     <h3>Step3</h3>
     <section>
       <p>カテゴリを選択</p>
-      <textarea name="category"></textarea>
+      <p>
+        <input type="radio" name="category" value="ご飯もの">ご飯もの<br>
+        <input type="radio" name="category" value="パン">パン<br>
+        <input type="radio" name="category" value="パスタ">パスタ<br>
+        <input type="radio" name="category" value="サラダ">サラダ<br>
+        <input type="radio" name="category" value="麺類">麺類<br>
+        <input type="radio" name="category" value="おかず">おかず<br>
+        <input type="radio" name="category" value="スープ・汁物">スープ・汁物<br>
+        <input type="radio" name="category" value="もどき料理">もどき料理<br>
+        <input type="radio" name="category" value="お菓子">お菓子<br>
+        <input type="radio" name="category" value="お弁当">お弁当<br>
+      </p>
+
+
       <p>ひとこと</p>
       <textarea name="comment"></textarea>
     </section>
@@ -38,6 +75,53 @@
           }
       });
   </script>
+
+  <script>
+      // 「材料」
+      $(document).on("click", ".add1", function () {
+
+          // 選択された親要素をコピーし、親要素の後に追加する
+          // ※親要素は<div id="item1">になる
+          // .find("input:text").val("").end().find("textarea, :text, select").val("").end()で、textタイプのinputとtextareaを空にする
+          $(this).parent().clone(true).find("input:text").val("").end().find("textarea, :text, select").val("").end().insertAfter($(this).parent());
+
+      });
+
+      $(document).on("click", ".del1", function () {
+
+          // 2ヵ所で使うので選択された親要素を変数targetに格納
+          // ※親要素は<div id="item1">になる
+          var target = $(this).parent();
+
+          // targetの親要素の配下の要素数が1以下だったら
+          // ※targetの親要素は<div id="list1">になる
+          if(target.parent().children().length > 1){
+
+              // <div id="item1">を削除する
+              target.remove();
+
+          }
+
+      });
+
+      // 「作り方」
+      $(document).on("click", ".add2", function () {
+          $(this).parent().clone(true).find("input:text").val("").end().find("textarea, :text, select").val("").end().insertAfter($(this).parent());
+      });
+
+      $(document).on("click", ".del2", function () {
+          var target = $(this).parent();
+          if(target.parent().children().length > 1){
+              target.remove();
+          }
+
+      });
+
+
+
+
+  </script>
+
     <input type="submit" value="投稿する">
 <% end %>
 

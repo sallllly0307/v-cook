@@ -21,27 +21,36 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(
         title: params[:title],
         comment: params[:comment],
+        category: params[:category],
+        minutes: params[:minutes],
         user_id: @current_user.id
     )
+
     @recipe.save
 
-    @ingredient = Ingredient.new(
-        recipe_id: @recipe.id,
-        name: params[:name],
-        quantity: params[:quantity],
-    )
+    #zipメソッドで複数の配列から同時に変数を取り出している
+    params[:name].zip(params[:quantity], params[:step]).each do |name, quantity, step|
+      ingredient = Ingredient.new(
+          recipe_id: @recipe.id,
+          name: name,
+          quantity: quantity
+      )
+      ingredient.save
+      steps = Step.new(
+          recipe_id: @recipe.id,
+          step: step
+      )
+      steps.save
+    end
 
-    @ingredient.save
-
-    @step = Step.new(
-        recipe_id: @recipe.id,
-        step: params[:step]
-    )
-
-    if @step.save
+    #応急処置　ifの条件をキレイにする必要がある
+    if @recipe.title != "null"
       @user = @recipe.user
       redirect_to("/users/#{@user.id}")
+    else
+      render("recipes/new")
     end
+
 
   end
 
@@ -76,5 +85,17 @@ class RecipesController < ApplicationController
     end
   end
 
+  def searchIndex
+    #パラメータ名きれいにする
+    if params[:search]
+      @recipes = Recipe.search(params[:search])
+    elsif params[:nameSearch]
+      @ingredients = Ingredient.nameSearch(params[:nameSearch])
+    elsif params[:category]
+      @recipes = Recipe.where(category: params[:category])
+    else
+      @recipes = Recipe.all
+    end
+  end
 
 end

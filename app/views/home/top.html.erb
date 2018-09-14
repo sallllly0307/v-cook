@@ -1,12 +1,12 @@
 <p>キーワードで検索</p>
 <%= form_tag("/recipes/search/index", {method: "post"}) do %>
-  <input type="text" name="search">
+  <input type="text" name="title">
   <input type="submit" value="検索">
 <% end %>
 
 <p>材料で検索</p>
 <%= form_tag("/recipes/search/index", {method: "post"}) do %>
-  <input type="text" name="nameSearch">
+  <input type="text" name="name">
   <input type="submit" value="検索">
 <% end %>
 

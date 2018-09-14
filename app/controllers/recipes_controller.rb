@@ -86,11 +86,10 @@ class RecipesController < ApplicationController
   end
 
   def searchIndex
-    #パラメータ名きれいにする
-    if params[:search]
-      @recipes = Recipe.search(params[:search])
-    elsif params[:nameSearch]
-      @ingredients = Ingredient.nameSearch(params[:nameSearch])
+    if params[:title]
+      @recipes = Recipe.titleSearch(params[:title])
+    elsif params[:name]
+      @ingredients = Ingredient.nameSearch(params[:name])
     elsif params[:category]
       @recipes = Recipe.where(category: params[:category])
     else

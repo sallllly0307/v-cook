@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="/jquery.steps.css">
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/main.css">
+    <script src="/jquery.js"></script>
+    <script src="/jquery.steps.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="/jquery.steps.min.js"></script>
+    <script src="/app/assets/javascripts/jquery.steps.min.js"></script>
+
     <title>VCookApp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,42 +20,42 @@
 
   <body>
     <header>
-      <div class="header-logo">
-        <div class="header-logo-left">
-          <%= link_to "/" do%>
-            <p>V-Cookのロゴ</p>
+        <div class="header-logo">
+          <div class="header-logo-left">
+            <%= link_to "/" do%>
+              <p>V-Cookのロゴ | </p>
+            <% end %>
+          </div>
+          <div class="header-logo-right">
+            <p>ヴィーガンのためのレシピサイト</p>
+          </div>
+        </div>
+        <div class="header-image">
+          <img src="/header-image.png">
+        </div>
+        <ul class="header-menus">
+          <li>
+            <%= link_to("ホーム", "/") %>
+          </li>
+          <li>
+            <%= link_to("ランキング", "/recipes/index") %>
+          </li>
+          <% if @current_user %>
+            <li>
+              <%= link_to("レシピ投稿", "/recipes/new") %>
+            </li>
+            <li>
+              <%= link_to("マイページ", "/users/#{@current_user.id}") %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to("新規登録", "/signup") %>
+            </li>
+            <li>
+              <%= link_to("ログイン", "/login") %>
+            </li>
           <% end %>
-        </div>
-        <div class="header-logo-right">
-          <p>ヴィーガンのためのレシピサイト</p>
-        </div>
-      </div>
-      <div class="header-image">
-        <img src="/public/header-image.png">
-      </div>
-      <ul class="header-menus">
-        <li>
-          <%= link_to("ホーム", "/") %>
-        </li>
-        <li>
-          <%= link_to("ランキング", "/recipes/index") %>
-        </li>
-        <% if @current_user %>
-          <li>
-            <%= link_to("レシピ投稿", "/recipes/new") %>
-          </li>
-          <li>
-            <%= link_to("マイページ", "/users/#{@current_user.id}") %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to("新規登録", "/signup") %>
-          </li>
-          <li>
-            <%= link_to("ログイン", "/login") %>
-          </li>
-        <% end %>
-      </ul>
+        </ul>
     </header>
 
     <% if flash[:notice] %>

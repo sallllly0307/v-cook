@@ -10,32 +10,99 @@ ul, li {
 
 /* 共通レイアウト ================================ */
 
+.container {
+  width: 100%;
+  padding-left: 35px;
+  padding-right: 35px;
+}
 
+.title {
+  text-align: center;
+  padding: 20px 20px 40px 20px;
+}
 
+.title p {
+  padding: 5px;
+  text-decoration-line: underline;
+  text-decoration-color: #BBBBBB;
+}
 
 /* ヘッダー ================================ */
 
+*{
+  box-sizing: border-box;
+}
+
 header {
-  height: 200px;
+  height: 50%;
   width: 100%;
 }
 
 .header-logo {
-  height: 50px;
+  padding: 15px;
 }
 
 .header-logo-left {
   float: left;
+
 }
 
 .header-logo-right {
-  float: right;
+  float: left;
+  font-size: 2vw;
 }
 
-.header-image {
-  height: 100px;
+.header-image img {
+  width: 100%;
+}
+
+.header-menus {
+  padding: 10px;
+  height: 40px;
 }
 
 .header-menus li{
-  float:left ;
+  width: 25%;
+  float: left;
+  text-align: center;
+  font-size: 3.5vw;
 }
+
+/* トップ画面 ================================ */
+
+.search-boxes {
+
+}
+
+.search-box {
+  margin-bottom: 30px;
+}
+
+.search-box p {
+  margin-bottom: 5px;
+}
+
+.search-window {
+  border: #BBBBBB solid 2px;
+  width: 80%;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.search-by-category {
+  border: #BBBBBB solid 2px;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.search-by-category li {
+  width: 50%;
+  float: left;
+  margin-bottom: 15px;
+}
+
+.submit-button {
+  text-align: center;
+}
+
+

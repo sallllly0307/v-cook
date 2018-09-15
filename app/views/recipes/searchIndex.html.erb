@@ -2,7 +2,7 @@
   <% @recipes.each do |recipe| %>
     <p>
       <!-- 表示項目追加予定 -->
-      <%= recipe.title %>
+      <%= link_to(recipe.title, "/recipes/#{recipe.id}") %></p>
     </p>
   <% end %>
 <% end %>
@@ -10,10 +10,10 @@
 <% if @ingredients %>
   <!-- find_byメソッドではなくwhereメソッドを使えばeach文を使わずに書けそう -->
   <% @ingredients.each do |ingredient| %>
-    <% @recipes = Recipe.find_by(id: ingredient.recipe_id) %>
+    <% @recipe = Recipe.find_by(id: ingredient.recipe_id) %>
     <p>
       <!-- 表示項目追加予定 -->
-      <%= @recipes.title %>
+      <%= link_to(@recipe.title, "/recipes/#{@recipe.id}") %></p>
     </p>
   <% end %>
 <% end %>

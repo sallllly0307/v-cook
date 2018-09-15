@@ -1,31 +1,55 @@
-<p>キーワードで検索</p>
-<%= form_tag("/recipes/search/index", {method: "post"}) do %>
-  <input type="text" name="title">
-  <input type="submit" value="検索">
-<% end %>
+<div class="top-wrapper" xmlns="http://www.w3.org/1999/html">
+  <div class="container">
+    <div class="title">
+      <p>レシピを探す</p>
+    </div>
+    <div class="search-boxes">
+      <div class="search-box">
+        <p>キーワードから探す</p>
+        <%= form_tag("/recipes/search/index", {method: "post"}) do %>
+          <input type="text" name="title" class="search-window">
+          <input type="submit" value="検索">
+        <% end %>
+      </div>
+      <div class="search-box">
+        <p>材料から探す</p>
+        <%= form_tag("/recipes/search/index", {method: "post"}) do %>
+          <input type="text" name="name" class="search-window">
+          <input type="submit" value="検索">
+        <% end %>
+      </div>
+      <div class="search-box">
+        <p>カテゴリーから探す</p>
+        <div class="search-by-category">
+          <!-- submitなしでカテゴリー選択と同時に画面遷移させる予定 -->
+          <%= form_tag("/recipes/search/index", {method: "post"}) do %>
+            <ul>
+              <li><input type="radio" name="category" value="ご飯もの">ご飯もの</li>
+              <li><input type="radio" name="category" value="パン">パン</li>
+              <li><input type="radio" name="category" value="パスタ">パスタ</li>
+              <li><input type="radio" name="category" value="サラダ">サラダ</li>
+              <li><input type="radio" name="category" value="麺類">麺類</li>
+              <li><input type="radio" name="category" value="おかず">おかず</li>
+              <li><input type="radio" name="category" value="スープ・汁物">スープ・汁物</li>
+              <li><input type="radio" name="category" value="もどき料理">もどき料理</li>
+              <li><input type="radio" name="category" value="お菓子">お菓子</li>
+              <li><input type="radio" name="category" value="お弁当">お弁当</li>
+            </ul>
+            <div class="submit-button">
+              <%= submit_tag '検索' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>材料で検索</p>
-<%= form_tag("/recipes/search/index", {method: "post"}) do %>
-  <input type="text" name="name">
-  <input type="submit" value="検索">
-<% end %>
 
-<p>カテゴリーで検索</p>
-<!-- 検索窓ではなく、選択肢を押して検索結果を表示 -->
-<!-- 検索の場合は複数選択有りで良さそう -->
 
-<%= form_tag("/recipes/search/index", {method: "post"}) do %>
-  <p>
-    <input type="radio" name="category" value="ご飯もの">ご飯もの<br>
-    <input type="radio" name="category" value="パン">パン<br>
-    <input type="radio" name="category" value="パスタ">パスタ<br>
-    <input type="radio" name="category" value="サラダ">サラダ<br>
-    <input type="radio" name="category" value="麺類">麺類<br>
-    <input type="radio" name="category" value="おかず">おかず<br>
-    <input type="radio" name="category" value="スープ・汁物">スープ・汁物<br>
-    <input type="radio" name="category" value="もどき料理">もどき料理<br>
-    <input type="radio" name="category" value="お菓子">お菓子<br>
-    <input type="radio" name="category" value="お弁当">お弁当<br>
-  </p>
-  <%= submit_tag '検索' %>
-<% end %>
+
+
+
+
+
+

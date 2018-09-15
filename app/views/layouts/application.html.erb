@@ -10,27 +10,36 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
   </head>
 
   <body>
     <header>
       <div class="header-logo">
-        <%= link_to("V-Cook", "/") %>
+        <div class="header-logo-left">
+          <%= link_to "/" do%>
+            <p>V-Cookのロゴ</p>
+          <% end %>
+        </div>
+        <div class="header-logo-right">
+          <p>ヴィーガンのためのレシピサイト</p>
+        </div>
+      </div>
+      <div class="header-image">
+        <img src="/public/header-image.png">
       </div>
       <ul class="header-menus">
+        <li>
+          <%= link_to("ホーム", "/") %>
+        </li>
+        <li>
+          <%= link_to("ランキング", "/recipes/index") %>
+        </li>
         <% if @current_user %>
-          <li>
-            <%= link_to("マイページ", "/users/#{@current_user.id}") %>
-          </li>
-          <li>
-            <%= link_to("ランキング", "/recipes/index") %>
-          </li>
           <li>
             <%= link_to("レシピ投稿", "/recipes/new") %>
           </li>
           <li>
-            <%= link_to("ログアウト", "/logout", {method: :post}) %>
+            <%= link_to("マイページ", "/users/#{@current_user.id}") %>
           </li>
         <% else %>
           <li>

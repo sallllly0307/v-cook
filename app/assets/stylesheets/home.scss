@@ -1,3 +1,41 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* reset ================================ */
+ul, li {
+  list-style: none;
+}
+
+
+/* 共通レイアウト ================================ */
+
+
+
+
+/* ヘッダー ================================ */
+
+header {
+  height: 200px;
+  width: 100%;
+}
+
+.header-logo {
+  height: 50px;
+}
+
+.header-logo-left {
+  float: left;
+}
+
+.header-logo-right {
+  float: right;
+}
+
+.header-image {
+  height: 100px;
+}
+
+.header-menus li{
+  float:left ;
+}

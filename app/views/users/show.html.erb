@@ -7,6 +7,7 @@
 <p><%= @user.detail %></p>
 <% if @user.id == @current_user.id %>
   <%= link_to("編集", "/users/#{@user.id}/edit") %>
+  <%= link_to("ログアウト", "/logout", {method: :post}) %>
 <% end %>
 
 <ul>

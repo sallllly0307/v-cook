@@ -1,22 +1,54 @@
-<img src="<%= "/user_images/#{@user.image_name}" %>">
-<h2><%= @user.name %></h2>
-<p><%= @user.email %></p>
-<p><%= @user.occupation %></p>
-<p><%= @user.age %>歳</p>
-<p><%= @user.address %></p>
-<p><%= @user.detail %></p>
-<% if @user.id == @current_user.id %>
-  <%= link_to("編集", "/users/#{@user.id}/edit") %>
-  <%= link_to("ログアウト", "/logout", {method: :post}) %>
-<% end %>
+<div class="mypage-wrapper">
+  <div class="container">
+    <div class="my-profile">
+      <img src="<%= "/user_images/#{@user.image_name}" %>">
+      <div class="edit-profile">
+        <% if @user.id == @current_user.id %>
+          <p class="edit-profile-button"><%= link_to("プロフィールを編集", "/users/#{@user.id}/edit") %></p>
+          <p class="logout-button"><%= link_to("ログアウト", "/logout", {method: :post}) %></p>
+        <% end %>
+      </div>
+      <div class="my-info-box">
+        <div class="my-info">
+          <h2><%= @user.name %></h2>
+          <p><%= @user.email %></p>
+          <p><%= @user.occupation %></p>
+          <p><%= @user.age %>歳</p>
+          <p><%= @user.address %></p>
+        </div>
+        <div class="sns-icons">
+          SNSアカウント
+        </div>
+      </div>
+      <div class="my-intro">
+        <p>ふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふがふが</p>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+</div>
 
-<ul>
-  <li><%= link_to("レシピ", "/users/#{@user.id}") %></li>
-  <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
-</ul>
+<div class="my-recipes-wrapper">
+  <div class="container">
+    <ul class="user-tabs">
+      <li class="user-tabs-left"><%= link_to("過去のレシピ", "/users/#{@user.id}") %></li>
+      <li><%= link_to("美味しいね!リスト", "/users/#{@user.id}/likes") %></li>
+      <div class="clear"></div>
+    </ul>
 
-<% @user.recipes.each do |recipe| %>
-  <img src="<%= "/user_images/#{recipe.user.image_name}" %>">
-  <%= link_to(recipe.user.name, "/users/#{recipe.user.id}") %>
-  <%= link_to(recipe.title, "/recipes/#{recipe.id}") %>
-<% end %>
+    <% @user.recipes.each do |recipe| %>
+      <div class="my-recipe">
+        <img src="<%= "/user_images/#{recipe.user.image_name}" %>">
+        <p class="my-recipe-title"><%= link_to(recipe.title, "/recipes/#{recipe.id}") %></p>
+        <p class="my-recipe-minutes"><%= recipe.minutes %>min</p>
+      </div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+</div>
+
+
+
+
+
+

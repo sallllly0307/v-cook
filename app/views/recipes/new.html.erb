@@ -1,65 +1,97 @@
-<%= form_tag("/recipes/create", {multipart: true}) do %>
-  <div id="example-basic">
-    <h3>Step1</h3>
-    <section>
-      <p>タイトル</p>
-      <textarea name="title"></textarea>
-      <p>写真</p>
-      <input type="text" name="top_image_name">
-    </section>
-    <h3>Step2</h3>
-    <section>
+<div class="new-recipe-wrapper">
+  <div class="container">
+    <div class="title">
+      <p>レシピを投稿しよう</p>
+    </div>
+    <div>
+      <%= form_tag("/recipes/create", {multipart: true}) do %>
+        <div id="example-basic">
 
-      <h4>材料</h4>
+          <h3>Step1</h3>
+          <section>
+            <p>タイトルをいれる</p>
+            <textarea name="title" class="title-window"></textarea>
+            <p>写真をいれる</p>
+            <input type="text" name="top_image_name" class="img-window">
+          </section>
 
-      <div id="list1">
-        <div id="item1">
-          <label for="label1" style="width: 20%">材料：</label>
-          <textarea name="name[]" style="width: 20%"></textarea>
-          <label for="label2" style="width: 20%">分量：</label>
-          <input type="text" name="quantity[]" style="width: 20%">
-          <input type="button" value="＋" class="add1" style="width: 10%">
-          <input type="button" value="－" class="del1" style="width: 10%">
+          <h3>Step2</h3>
+
+          <section>
+            <h4>材料</h4>
+            <div class="ingredients">
+              <div class="ingredients-item">
+                <label for="label1">材料名</label>
+                <label for="label2">分量</label>
+              </div>
+              <div id="list1">
+                <div id="item1" class="ingredient-windows">
+                  <textarea class="ingredient-window" name="name[]"></textarea>
+                  <input class="quantity-window" type="text" name="quantity[]">
+                </div>
+                <input type="button" value="＋" class="add1">
+                <input type="button" value="－" class="del1">
+              </div>
+            </div>
+
+
+            <h4>作り方</h4>
+
+            <div class="minutes">
+              <label>かかる時間</label>
+              <input name="minutes">min
+            </div>
+
+            <div class="steps">
+              <div class="steps-item">
+                <label for="label1">作り方</label>
+                <label for="label2">写真</label>
+              </div>
+              <div id="list2">
+                <div id="item2" class="step-windows">
+                  <textarea class="step-window" name="step[]"></textarea>
+                  <input class="step-image-window"  type="text" name="">
+                </div>
+                <input type="button" value="－" class="del2">
+                <input type="button" value="＋" class="add2">
+              </div>
+            </div>
+          </section>
+
+          <h3>Step3</h3>
+
+          <section>
+            <div class="select-category-box">
+              <p>カテゴリーを選択</p>
+              <div class="select-category">
+                <ul>
+                  <li><input type="radio" name="category" value="ご飯もの">ご飯もの</li>
+                  <li><input type="radio" name="category" value="パン">パン</li>
+                  <li><input type="radio" name="category" value="パスタ">パスタ</li>
+                  <li><input type="radio" name="category" value="サラダ">サラダ</li>
+                  <li><input type="radio" name="category" value="麺類">麺類</li>
+                  <li><input type="radio" name="category" value="おかず">おかず</li>
+                  <li><input type="radio" name="category" value="スープ・汁物">スープ・汁物</li>
+                  <li><input type="radio" name="category" value="もどき料理">もどき料理</li>
+                  <li><input type="radio" name="category" value="お菓子">お菓子</li>
+                  <li><input type="radio" name="category" value="お弁当">お弁当</li>
+                </ul>
+              </div>
+            </div>
+
+            <p>おすすめポイント</p>
+            <textarea class="comment" name="comment"></textarea>
+
+          </section>
+
         </div>
-      </div>
-
-      <h4>作り方</h4>
-      <label>かかる時間</label>
-      <input name="minutes">min
-
-      <div id="list2">
-        <div id="item2">
-          <label for="label1" style="width: 20%">作り方：</label>
-          <textarea name="step[]" style="width: 20%"></textarea>
-          <label for="label2" style="width: 20%">写真：</label>
-          <input type="text" name="" style="width: 20%">
-          <input type="button" value="＋" class="add2" style="width: 10%">
-          <input type="button" value="－" class="del2" style="width: 10%">
+        <input class="recipe-submit" type="submit" value="投稿する">
+      <% end %>
         </div>
-      </div>
-
-    </section>
-    <h3>Step3</h3>
-    <section>
-      <p>カテゴリを選択</p>
-      <p>
-        <input type="radio" name="category" value="ご飯もの">ご飯もの<br>
-        <input type="radio" name="category" value="パン">パン<br>
-        <input type="radio" name="category" value="パスタ">パスタ<br>
-        <input type="radio" name="category" value="サラダ">サラダ<br>
-        <input type="radio" name="category" value="麺類">麺類<br>
-        <input type="radio" name="category" value="おかず">おかず<br>
-        <input type="radio" name="category" value="スープ・汁物">スープ・汁物<br>
-        <input type="radio" name="category" value="もどき料理">もどき料理<br>
-        <input type="radio" name="category" value="お菓子">お菓子<br>
-        <input type="radio" name="category" value="お弁当">お弁当<br>
-      </p>
-
-
-      <p>ひとこと</p>
-      <textarea name="comment"></textarea>
-    </section>
   </div>
+</div>
+
+
   <script>
       $("#example-basic").steps({
           headerTag: "h3",
@@ -70,7 +102,7 @@
           labels: {
               next: "次へ",
               previous: "戻る",
-              finish: "完了！"
+              finish: "完成！"
           }
       });
   </script>
@@ -83,7 +115,6 @@
           // ※親要素は<div id="item1">になる
           // .find("input:text").val("").end().find("textarea, :text, select").val("").end()で、textタイプのinputとtextareaを空にする
           $(this).parent().clone(true).find("input:text").val("").end().find("textarea, :text, select").val("").end().insertAfter($(this).parent());
-
       });
 
       $(document).on("click", ".del1", function () {
@@ -121,8 +152,7 @@
 
   </script>
 
-    <input type="submit" value="投稿する">
-<% end %>
+
 
 
 

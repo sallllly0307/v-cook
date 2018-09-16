@@ -11,6 +11,8 @@
   color: #ff2581;
 }
 
+/* ランキング表示 ================================ */
+
 .ranking-wrapper {
   background-image: url("/background-image-1.png");
   background-size: 17%;
@@ -69,5 +71,197 @@
   border-radius: 100%;
 }
 
+/* レシピ投稿 ================================ */
+
+.new-recipe-wrapper {
+  margin-bottom: 30px;
+}
+
+.title-window {
+  border: #BBBBBB solid 1px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0 30px 0;
+}
+
+.img-window {
+  border: #BBBBBB solid 1px;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 30px 0;
+  height: 80vw;
+}
 
 
+
+.ingredients-item {
+  text-align: center;
+}
+
+.ingredients-item label {
+  width: 38%;
+  float: left;
+}
+
+.ingredients {
+  display: inline-block;
+  margin: 20px 0 50px 0;
+}
+
+.ingredient-windows {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.ingredient-window {
+  width: 59%;
+  float: left;
+  margin-right: 2px;
+  border: #BBBBBB solid 1px;
+  border-radius: 5px;
+  height: 10vw;
+  padding: 1px;
+}
+
+
+.quantity-window {
+  width: 39%;
+  float: left;
+  margin-right: 2px;
+  border: #BBBBBB solid 1px;
+  border-radius: 5px;
+  height: 10vw;
+  padding: 1px;
+}
+
+.add1 {
+  width: 10%;
+  float: right;
+  margin-right: 2px;
+  border: #BBBBBB solid 1px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.del1 {
+  width: 10%;
+  float: left;
+  margin-right: 2px;
+  border: #BBBBBB solid 1px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.minutes {
+  margin: 10px 0 10px 0;
+  float: right;
+}
+
+.minutes label {
+  float: left;
+  margin-right: 20px;
+}
+
+.minutes input {
+  width: 15vw;
+  float: left;
+  margin-right: 3px;
+  border: #BBBBBB solid 1px;
+  border-radius: 5px;
+}
+
+.steps {
+  display: inline-block;
+  margin: 20px 0 50px 0;
+}
+
+
+.steps-item {
+  text-align: center;
+}
+
+.steps-item label {
+  width: 38%;
+  float: left;
+}
+
+.step-windows {
+  display: inline-block;
+  margin: 10px 0 1px 0;
+}
+
+.step-window {
+  width: 70%;
+  float: left;
+  margin-right: 2px;
+  border: #BBBBBB solid 1px;
+  border-radius: 5px;
+  height: 30vw;
+  padding: 1px;
+}
+
+
+.step-image-window {
+  width: 25%;
+  margin-right: 2px;
+  border: #BBBBBB solid 1px;
+  border-radius: 5px;
+  height: 20vw;
+  padding: 1px;
+}
+
+.add2 {
+  width: 10%;
+  float: right;
+  margin-right: 2px;
+  border: #BBBBBB solid 1px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.del2 {
+  width: 10%;
+  float: left;
+  margin-right: 2px;
+  border: #BBBBBB solid 1px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.select-category-box {
+  margin-bottom: 30px;
+}
+
+.select-category-box p {
+  margin-bottom: 5px;
+}
+
+
+.select-category {
+  border: #BBBBBB solid 1px;
+  padding: 12px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.select-category li {
+  width: 50%;
+  float: left;
+  margin-bottom: 15px;
+}
+
+.comment {
+  border: #BBBBBB solid 1px;
+  padding: 12px;
+  border-radius: 10px;
+  display: inline-block;
+  width: 100%;
+}
+
+.recipe-submit {
+  background-color: #FF9600;
+  color: white;
+  border-radius: 5px;
+}

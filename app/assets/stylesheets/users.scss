@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/* マイページ ================================ */
+
 .my-profile {
   margin-top: 30px;
 }
@@ -104,6 +106,33 @@
   font-size: 2px;
   border-radius: 100%;
 }
+
+/* マイページ編集 ================================ */
+
+.edit-prof-wrapper {
+  margin-top: 30px;
+}
+
+.edit-prof-wrapper p {
+  margin-top: 10px;
+}
+
+.edit-prof-wrapper input, textarea {
+  border: #BBBBBB solid 1px;
+  border-radius: 5px;
+}
+
+.edit-prof-image {
+  width: 100%;
+}
+
+.edit-submit {
+  background-color: #FF9600;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
 
 
 

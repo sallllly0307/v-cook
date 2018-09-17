@@ -11,6 +11,8 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find_by(id: params[:id])
     @user = @recipe.user
     @likes_count = Like.where(recipe_id: @recipe.id).count
+    @ingredients = Ingredient.where(recipe_id: @recipe.id)
+    @steps = Step.where(recipe_id: @recipe.id)
   end
 
   def new
@@ -56,6 +58,9 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find_by(id: params[:id])
+    @user = @recipe.user
+    @ingredients = Ingredient.where(recipe_id: @recipe.id)
+    @steps = Step.where(recipe_id: @recipe.id)
   end
 
   def update

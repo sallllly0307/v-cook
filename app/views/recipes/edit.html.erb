@@ -1,5 +1,127 @@
-<%= form_tag("/recipes/#{@recipe.id}/update") do %>
-  <textarea name="title"><%= @recipe.title %></textarea>
-  <textarea name="comment"><%= @recipe.comment %></textarea>
-  <input type="submit" value="保存">
-<% end %>
+<div class="new-recipe-wrapper">
+  <div class="container">
+    <div class="title">
+      <p>レシピを編集する</p>
+    </div>
+      <%= form_tag("/recipes/update", {multipart: true}) do %>
+
+            <p>タイトル</p>
+            <textarea name="title" class="title-window"><%= @recipe.title %></textarea>
+            <p>写真</p>
+            <input type="text" name="top_image_name" class="img-window">
+
+
+            <h4>材料</h4>
+
+      <% @ingredients.each do |ingredient| %>
+
+            <div class="ingredients">
+              <div class="ingredients-item">
+                <label for="label1">材料名</label>
+                <label for="label2">分量</label>
+              </div>
+              <div id="list1">
+                <div id="item1" class="ingredient-windows">
+                  <textarea class="ingredient-window" name="name[]"><%= ingredient.name %></textarea>
+                  <input class="quantity-window" type="text" name="quantity[]" value="<%= ingredient.quantity %>">
+                </div>
+                <input type="button" value="＋" class="add1">
+                <input type="button" value="－" class="del1">
+              </div>
+            </div>
+
+        <% end %>
+
+
+            <div class="minutes">
+              <label>かかる時間</label>
+              <input name="minutes">min
+            </div>
+
+      <% @steps.each do |step| %>
+
+            <div class="steps">
+              <div class="steps-item">
+                <label for="label1">作り方</label>
+                <label for="label2">写真</label>
+              </div>
+              <div id="list2">
+                <div id="item2" class="step-windows">
+                  <textarea class="step-window" name="step[]"><%= step.step %></textarea>
+                  <input class="step-image-window"  type="text" name="">
+                </div>
+                <input type="button" value="－" class="del2">
+                <input type="button" value="＋" class="add2">
+              </div>
+            </div>
+
+        <% end %>
+
+            <div class="select-category-box">
+              <p>カテゴリーを選択</p>
+              <div class="select-category">
+                <ul>
+                  <li><input type="radio" name="category" value="ご飯もの">ご飯もの</li>
+                  <li><input type="radio" name="category" value="パン">パン</li>
+                  <li><input type="radio" name="category" value="パスタ">パスタ</li>
+                  <li><input type="radio" name="category" value="サラダ">サラダ</li>
+                  <li><input type="radio" name="category" value="麺類">麺類</li>
+                  <li><input type="radio" name="category" value="おかず">おかず</li>
+                  <li><input type="radio" name="category" value="スープ・汁物">スープ・汁物</li>
+                  <li><input type="radio" name="category" value="もどき料理">もどき料理</li>
+                  <li><input type="radio" name="category" value="お菓子">お菓子</li>
+                  <li><input type="radio" name="category" value="お弁当">お弁当</li>
+                </ul>
+              </div>
+            </div>
+
+            <p>おすすめポイント</p>
+            <textarea class="comment" name="comment"><%= @recipe.comment %></textarea>
+
+        <input class="recipe-submit" type="submit" value="編集して保存">
+      <% end %>
+  </div>
+</div>
+
+
+<script>
+    // 「材料」
+    $(document).on("click", ".add1", function () {
+
+        // 選択された親要素をコピーし、親要素の後に追加する
+        // ※親要素は<div id="item1">になる
+        // .find("input:text").val("").end().find("textarea, :text, select").val("").end()で、textタイプのinputとtextareaを空にする
+        $(this).parent().clone(true).find("input:text").val("").end().find("textarea, :text, select").val("").end().insertAfter($(this).parent());
+    });
+
+    $(document).on("click", ".del1", function () {
+
+        // 2ヵ所で使うので選択された親要素を変数targetに格納
+        // ※親要素は<div id="item1">になる
+        var target = $(this).parent();
+
+        // targetの親要素の配下の要素数が1以下だったら
+        // ※targetの親要素は<div id="list1">になる
+        if(target.parent().children().length > 1){
+
+            // <div id="item1">を削除する
+            target.remove();
+
+        }
+
+    });
+
+    // 「作り方」
+    $(document).on("click", ".add2", function () {
+        $(this).parent().clone(true).find("input:text").val("").end().find("textarea, :text, select").val("").end().insertAfter($(this).parent());
+    });
+
+    $(document).on("click", ".del2", function () {
+        var target = $(this).parent();
+        if(target.parent().children().length > 1){
+            target.remove();
+        }
+
+    });
+
+</script>

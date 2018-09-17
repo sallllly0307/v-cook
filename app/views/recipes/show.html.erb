@@ -1,23 +1,57 @@
-<img src="<%= "/user_images/#{@user.image_name}" %>">
-<%= link_to(@user.name, "/users/#{@user.id}") %>
+<div class="recipe-detail-wrapper">
+  <div class="container">
+    <div class="recipe-detail-heading">
+      <h2><%= @recipe.title %></h2>
+      <p class="detail-recipe-user">投稿者 | <%= link_to(@user.name, "/users/#{@user.id}") %></p>
+      <p class="detail-recipe-minutes"><%= @recipe.minutes %>min</p>
+    </div>
+    <div class="recipe-detail">
+      <img class="detail-image" src="<%= "/sample-recipe-image.png" %>"> <!-- リンク差し替え予定 -->
 
-<%= @recipe.title %>
-<%= @recipe.comment %>
-<%= @recipe.created_at %>
+      <% if Like.find_by(user_id: @current_user.id, recipe_id: @recipe.id) %>
+        <%= link_to("/likes/#{@recipe.id}/destroy", {method: "post"}) do %>
+          <span class="fa fa-heart like-btn-unlike"></span>
+        <% end %>
+      <% else %>
+        <%= link_to("/likes/#{@recipe.id}/create", {method: "post"}) do %>
+          <span class="fa fa-heart like-btn"></span>
+        <% end %>
+      <% end %>
+      <%= @likes_count %>人が美味しいね!しました
 
-<% if Like.find_by(user_id: @current_user.id, recipe_id: @recipe.id) %>
-  <%= link_to("/likes/#{@recipe.id}/destroy", {method: "post"}) do %>
-    <span class="fa fa-heart like-btn-unlike"></span>
-  <% end %>
-<% else %>
-  <%= link_to("/likes/#{@recipe.id}/create", {method: "post"}) do %>
-    <span class="fa fa-heart like-btn"></span>
-  <% end %>
-<% end %>
-<%= @likes_count %>
+      <div class="detail-ingredients">
+        <h2>材料</h2>
+      <% @ingredients.each do |ingredient| %>
+        <div class="detail-ingredient">
+          <p class="detail-ingredient-name"><%= ingredient.name  %></p>
+          <p class="detail-ingredient-quantity"><%= ingredient.quantity %></p>
+        </div>
+      <% end %>
+      </div>
+
+      <div class="detail-steps">
+        <h2>作り方</h2>
+        <% @steps.each.with_index(1) do |step, i| %>
+          <div class="detail-step">
+            <p><%= "#{i}" %></p>
+            <p><%= step.step %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="detail-comment">
+        <h2>おすすめポイント</h2>
+        <p><%= @recipe.comment %></p>
+      </div>
+
+    </div>
+
+    <% if @recipe.user_id == @current_user.id %>
+      <%= link_to("編集","/recipes/#{@recipe.id}/edit") %>
+      <%= link_to("削除","/recipes/#{@recipe.id}/destroy", {method: "post"}) %>
+    <% end %>
+
+  </div>
+</div>
 
 
-<% if @recipe.user_id == @current_user.id %>
-  <%= link_to("編集","/recipes/#{@recipe.id}/edit") %>
-  <%= link_to("削除","/recipes/#{@recipe.id}/destroy", {method: "post"}) %>
-<% end %>

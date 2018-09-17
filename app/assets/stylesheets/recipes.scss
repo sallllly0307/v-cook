@@ -264,5 +264,75 @@
 .recipe-submit {
   background-color: #FF9600;
   color: white;
+  border: none;
   border-radius: 5px;
 }
+
+.recipe-detail-wrapper{
+  margin: 50px 0;
+}
+
+.recipe-detail-heading h2 {
+  text-align: center;
+  font-size: 25px;
+  clear: both;
+}
+
+.recipe-detail-heading p {
+  margin: 20px 0;
+}
+
+.detail-recipe-user {
+  width: 70%;
+  float: left;
+  text-align: left;
+}
+
+.detail-recipe-minutes {
+  float: right;
+  border: #BBBBBB solid 1px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 100%;
+}
+
+.detail-image {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.detail-ingredients {
+  width: 100%;
+  margin: 50px 0;
+}
+
+.detail-ingredient {
+  clear: both;
+  border-bottom: #BBBBBB solid 1px;
+  padding-top: 15px;
+  height: 40px;
+  font-size: 20px;
+}
+
+.detail-ingredient-name {
+  float: left;
+}
+
+.detail-ingredient-quantity {
+  float: right;
+}
+
+.detail-step {
+  margin-top: 30px;
+}
+
+.detail-comment {
+  margin: 50px 0;
+}
+
+.detail-comment p {
+  margin-top: 10px;
+}
+
+
+

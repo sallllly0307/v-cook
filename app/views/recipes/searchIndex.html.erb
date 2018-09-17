@@ -1,19 +1,44 @@
-<% if @recipes %>
-  <% @recipes.each do |recipe| %>
-    <p>
-      <!-- 表示項目追加予定 -->
-      <%= link_to(recipe.title, "/recipes/#{recipe.id}") %></p>
-    </p>
-  <% end %>
-<% end %>
+<div class="container">
+  <% if @recipes %>
+    <% @recipes.each do |recipe| %>
+      <% @user = User.find_by(id: recipe.user_id) %>
+      <div class="recipe-detail-heading">
+        <h2><%= recipe.title %></h2>
+        <p class="detail-recipe-user">投稿者 | <%= link_to(@user.name, "/users/#{@user.id}") %></p>
+        <p class="detail-recipe-minutes"><%= recipe.minutes %>min</p>
+      </div>
+      <div class="recipe-detail">
+        <img class="detail-image" src="<%= "/sample-recipe-image.png" %>"> <!-- リンク差し替え予定 -->
 
-<% if @ingredients %>
-  <!-- find_byメソッドではなくwhereメソッドを使えばeach文を使わずに書けそう -->
-  <% @ingredients.each do |ingredient| %>
-    <% @recipe = Recipe.find_by(id: ingredient.recipe_id) %>
-    <p>
-      <!-- 表示項目追加予定 -->
-      <%= link_to(@recipe.title, "/recipes/#{@recipe.id}") %></p>
-    </p>
+        <% if Like.find_by(user_id: @current_user.id, recipe_id: recipe.id) %>
+          <%= link_to("/likes/#{recipe.id}/destroy", {method: "post"}) do %>
+            <span class="fa fa-heart like-btn-unlike"></span>
+          <% end %>
+        <% else %>
+          <%= link_to("/likes/#{recipe.id}/create", {method: "post"}) do %>
+            <span class="fa fa-heart like-btn"></span>
+          <% end %>
+        <% end %>
+        <% @likes_count = Like.where(recipe_id: recipe.id).count %>
+        <%= @likes_count %>人が美味しいね!しました
+
+        <div class="detail-comment">
+          <h2>おすすめポイント</h2>
+          <p><%= recipe.comment %></p>
+        </div>
+
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+
+  <% if @ingredients %>
+    <!-- find_byメソッドではなくwhereメソッドを使えばeach文を使わずに書けそう -->
+    <% @ingredients.each do |ingredient| %>
+      <% @recipe = Recipe.find_by(id: ingredient.recipe_id) %>
+      <p>
+        <!-- 表示項目追加予定 -->
+        <%= link_to(@recipe.title, "/recipes/#{@recipe.id}") %></p>
+      </p>
+    <% end %>
+  <% end %>
+</div>

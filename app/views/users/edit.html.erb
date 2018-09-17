@@ -1,5 +1,6 @@
 <div class="edit-prof-wrapper">
   <div class="container">
+    <p class="back"><%= link_to '<<保存せずに戻る', :back %> </p>
     <h2>プロフィールを編集</h2>
     <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
       <p>画像</p>

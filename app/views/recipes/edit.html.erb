@@ -3,6 +3,7 @@
     <div class="title">
       <p>レシピを編集する</p>
     </div>
+    <p class="back"><%= link_to '<<保存せずに戻る', :back %> </p>
       <%= form_tag("/recipes/update", {multipart: true}) do %>
 
             <p>タイトル</p>

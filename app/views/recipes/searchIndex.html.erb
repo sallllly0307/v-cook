@@ -1,44 +1,139 @@
-<div class="container">
-  <% if @recipes %>
-    <% @recipes.each do |recipe| %>
-      <% @user = User.find_by(id: recipe.user_id) %>
-      <div class="recipe-detail-heading">
-        <h2><%= recipe.title %></h2>
-        <p class="detail-recipe-user">投稿者 | <%= link_to(@user.name, "/users/#{@user.id}") %></p>
-        <p class="detail-recipe-minutes"><%= recipe.minutes %>min</p>
-      </div>
-      <div class="recipe-detail">
-        <img class="detail-image" src="<%= "/sample-recipe-image.png" %>"> <!-- リンク差し替え予定 -->
-
-        <% if Like.find_by(user_id: @current_user.id, recipe_id: recipe.id) %>
-          <%= link_to("/likes/#{recipe.id}/destroy", {method: "post"}) do %>
-            <span class="fa fa-heart like-btn-unlike"></span>
-          <% end %>
-        <% else %>
-          <%= link_to("/likes/#{recipe.id}/create", {method: "post"}) do %>
-            <span class="fa fa-heart like-btn"></span>
-          <% end %>
+<div class="searchIndex-wrapper">
+  <div class="container">
+    <% if params[:title] %>
+      <div class="search-box">
+        <p>キーワードから探す</p>
+        <%= form_tag("/recipes/search/index", {method: "post"}) do %>
+          <input type="text" name="title" class="search-window" value="<%= params[:title] %>">
+          <input type="submit" value="検索">
         <% end %>
-        <% @likes_count = Like.where(recipe_id: recipe.id).count %>
-        <%= @likes_count %>人が美味しいね!しました
-
-        <div class="detail-comment">
-          <h2>おすすめポイント</h2>
-          <p><%= recipe.comment %></p>
-        </div>
-
       </div>
-    <% end %>
-  <% end %>
+      <% @recipes.each do |recipe| %>
+        <% @user = User.find_by(id: recipe.user_id) %>
+        <div class="recipe-detail-heading">
+          <h2><%= recipe.title %></h2>
+          <p class="detail-recipe-user">投稿者 | <%= link_to(@user.name, "/users/#{@user.id}") %></p>
+          <p class="detail-recipe-minutes"><%= recipe.minutes %>min</p>
+        </div>
+        <div class="recipe-detail">
+          <img class="detail-image" src="<%= "/sample-recipe-image.png" %>"> <!-- リンク差し替え予定 -->
 
-  <% if @ingredients %>
-    <!-- find_byメソッドではなくwhereメソッドを使えばeach文を使わずに書けそう -->
-    <% @ingredients.each do |ingredient| %>
-      <% @recipe = Recipe.find_by(id: ingredient.recipe_id) %>
-      <p>
-        <!-- 表示項目追加予定 -->
-        <%= link_to(@recipe.title, "/recipes/#{@recipe.id}") %></p>
-      </p>
+          <% if Like.find_by(user_id: @current_user.id, recipe_id: recipe.id) %>
+            <%= link_to("/likes/#{recipe.id}/destroy", {method: "post"}) do %>
+              <span class="fa fa-heart like-btn-unlike"></span>
+            <% end %>
+          <% else %>
+            <%= link_to("/likes/#{recipe.id}/create", {method: "post"}) do %>
+              <span class="fa fa-heart like-btn"></span>
+            <% end %>
+          <% end %>
+          <% @likes_count = Like.where(recipe_id: recipe.id).count %>
+          <%= @likes_count %>人が美味しいね!しました
+
+          <div class="detail-comment">
+            <h2>おすすめポイント</h2>
+            <p><%= recipe.comment %></p>
+          </div>
+
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+
+    <% if @ingredients %>
+      <div class="search-box">
+        <p>材料から探す</p>
+        <%= form_tag("/recipes/search/index", {method: "post"}) do %>
+          <input type="text" name="name" class="search-window" value="<%= params[:name] %>">
+          <input type="submit" value="検索">
+        <% end %>
+      </div>
+      <% @ingredients.each do |ingredient| %>
+        <% @recipe = Recipe.find_by(id: ingredient.recipe_id) %>
+        <% @user = User.find_by(id: @recipe.user_id) %>
+        <div class="recipe-detail-heading">
+          <h2><%= @recipe.title %></h2>
+          <p class="detail-recipe-user">投稿者 | <%= link_to(@user.name, "/users/#{@user.id}") %></p>
+          <p class="detail-recipe-minutes"><%= @recipe.minutes %>min</p>
+        </div>
+        <div class="recipe-detail">
+          <img class="detail-image" src="<%= "/sample-recipe-image.png" %>"> <!-- リンク差し替え予定 -->
+
+          <% if Like.find_by(user_id: @current_user.id, recipe_id: @recipe.id) %>
+            <%= link_to("/likes/#{@recipe.id}/destroy", {method: "post"}) do %>
+              <span class="fa fa-heart like-btn-unlike"></span>
+            <% end %>
+          <% else %>
+            <%= link_to("/likes/#{@recipe.id}/create", {method: "post"}) do %>
+              <span class="fa fa-heart like-btn"></span>
+            <% end %>
+          <% end %>
+          <% @likes_count = Like.where(recipe_id: @recipe.id).count %>
+          <%= @likes_count %>人が美味しいね!しました
+
+          <div class="detail-comment">
+            <h2>おすすめポイント</h2>
+            <p><%= @recipe.comment %></p>
+          </div>
+
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if params[:category] %>
+      <p class="search-results-category">「<%= params[:category] %>」カテゴリーの検索結果</p>
+      <div class="search-box">
+        <div class="search-by-category">
+          <!-- submitなしでカテゴリー選択と同時に画面遷移させる予定 -->
+          <%= form_tag("/recipes/search/index", {method: "post"}) do %>
+            <ul>
+              <li><input type="radio" name="category" value="ご飯もの">ご飯もの</li>
+              <li><input type="radio" name="category" value="パン">パン</li>
+              <li><input type="radio" name="category" value="パスタ">パスタ</li>
+              <li><input type="radio" name="category" value="サラダ">サラダ</li>
+              <li><input type="radio" name="category" value="麺類">麺類</li>
+              <li><input type="radio" name="category" value="おかず">おかず</li>
+              <li><input type="radio" name="category" value="スープ・汁物">スープ・汁物</li>
+              <li><input type="radio" name="category" value="もどき料理">もどき料理</li>
+              <li><input type="radio" name="category" value="お菓子">お菓子</li>
+              <li><input type="radio" name="category" value="お弁当">お弁当</li>
+            </ul>
+            <div class="submit-button">
+              <%= submit_tag '検索' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <% @recipes.each do |recipe| %>
+        <% @user = User.find_by(id: recipe.user_id) %>
+        <div class="recipe-detail-heading">
+          <h2><%= recipe.title %></h2>
+          <p class="detail-recipe-user">投稿者 | <%= link_to(@user.name, "/users/#{@user.id}") %></p>
+          <p class="detail-recipe-minutes"><%= recipe.minutes %>min</p>
+        </div>
+        <div class="recipe-detail">
+          <img class="detail-image" src="<%= "/sample-recipe-image.png" %>"> <!-- リンク差し替え予定 -->
+
+          <% if Like.find_by(user_id: @current_user.id, recipe_id: recipe.id) %>
+            <%= link_to("/likes/#{recipe.id}/destroy", {method: "post"}) do %>
+              <span class="fa fa-heart like-btn-unlike"></span>
+            <% end %>
+          <% else %>
+            <%= link_to("/likes/#{recipe.id}/create", {method: "post"}) do %>
+              <span class="fa fa-heart like-btn"></span>
+            <% end %>
+          <% end %>
+          <% @likes_count = Like.where(recipe_id: recipe.id).count %>
+          <%= @likes_count %>人が美味しいね!しました
+
+          <div class="detail-comment">
+            <h2>おすすめポイント</h2>
+            <p><%= recipe.comment %></p>
+          </div>
+
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
 </div>
+

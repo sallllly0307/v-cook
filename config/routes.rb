@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   get "/users/:id/likes" => "users#likes"
 
   post "/recipes/search/index" => "recipes#searchIndex"
+  get "/recipes/search/index" => "recipes#searchIndex"
 
 end

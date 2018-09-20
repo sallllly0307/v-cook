@@ -4,7 +4,7 @@
     <h2>プロフィールを編集</h2>
     <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
       <p>画像</p>
-      <input class="edit-prof-image" name="image" type="file">
+      <input class="edit-prof-image" name="userImage" type="file" value="<%= @user.image_name %>">
       <p>ユーザー名</p>
       <input name="name" value="<%= @user.name %>">
       <p>メールアドレス</p>
@@ -16,7 +16,7 @@
       <p>住まい</p>
       <input name="address" value="<%= @user.address %>">
       <p>プロフィール</p>
-      <textarea name="detail" value="<%= @user.detail %>"></textarea>
+      <textarea name="detail"><%= @user.detail %></textarea>
       <input class="edit-submit" type="submit" value="保存">
     <% end %>
   </div>

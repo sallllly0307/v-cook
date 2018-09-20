@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
   before_action :ensure_correct_user, {only: [:edit, :update]}
 
+  include CarrierWave::MiniMagick
+  require "mini_magick"
+
   def new
     @user = User.new
   end
@@ -15,11 +18,15 @@ class UsersController < ApplicationController
         image_name: "default.png"
     )
     if @user.save
-      @user.image_name = "#{@user.id}.png"
-      if image = params[:image]
-         File.binwrite("public/user_images/#{@user.image_name}", image.read)
-         @user.save
+
+      if params[:userImage]
+        @user.image_name = "#{@user.id}.png"
+        img = MiniMagick::Image.read(params[:userImage])
+        img.resize_to_limit(100, 100, center)
+        img.write "public/user_images/#{@user.image_name}"
+        @user.save
       end
+
       session[:user_id] = @user.id
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/users/#{@user.id}")
@@ -45,9 +52,9 @@ class UsersController < ApplicationController
     @user.address = params[:address]
     @user.detail = params[:detail]
 
-    if params[:image]
+    if params[:userImage]
       @user.image_name = "#{@user.id}.png"
-      image = params[:image]
+      image = params[:userImage]
       File.binwrite("public/user_images/#{@user.image_name}", image.read)
     end
 

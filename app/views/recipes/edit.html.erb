@@ -4,12 +4,12 @@
       <p>レシピを編集する</p>
     </div>
     <p class="back"><%= link_to '<<保存せずに戻る', :back %> </p>
-      <%= form_tag("/recipes/update", {multipart: true}) do %>
+      <%= form_tag("/recipes/#{@recipe.id}/update", {multipart: true}) do %>
 
             <p>タイトル</p>
             <textarea name="title" class="title-window"><%= @recipe.title %></textarea>
             <p>写真</p>
-            <input type="text" name="top_image_name" class="img-window">
+            <input type="file" name="top_image_name" class="img-window" value="<%= @recipe.top_image_name %>">
 
 
             <h4>材料</h4>
@@ -36,7 +36,7 @@
 
             <div class="minutes">
               <label>かかる時間</label>
-              <input name="minutes">min
+              <input name="minutes" value="<%= @recipe.minutes %>">min
             </div>
 
       <% @steps.each do |step| %>
@@ -49,7 +49,7 @@
               <div id="list2">
                 <div id="item2" class="step-windows">
                   <textarea class="step-window" name="step[]"><%= step.step %></textarea>
-                  <input class="step-image-window"  type="text" name="">
+                  <input class="step-image-window"  type="file" name="step_image[]" value="<%= step.step_image %>">
                 </div>
                 <input type="button" value="－" class="del2">
                 <input type="button" value="＋" class="add2">

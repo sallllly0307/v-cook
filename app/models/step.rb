@@ -1,3 +1,3 @@
 class Step < ApplicationRecord
-  validates :step, {presence: true}
+  #validates :step, {presence: true}
 end

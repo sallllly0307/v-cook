@@ -37,7 +37,7 @@
 
     <% @user.recipes.each do |recipe| %>
       <div class="my-recipe">
-        <img src="<%= "/user_images/#{recipe.user.image_name}" %>">
+        <img src="<%= "/recipe_top_images/#{recipe.top_image_name}" %>">
         <p class="my-recipe-title"><%= link_to(recipe.title, "/recipes/#{recipe.id}") %></p>
         <p class="my-recipe-minutes"><%= recipe.minutes %>min</p>
       </div>

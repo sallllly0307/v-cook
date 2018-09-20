@@ -71,3 +71,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'jquery-rails'
 
 gem 'rails4-autocomplete'
+
+# 画像リサイズ
+gem 'carrierwave'
+gem 'mini_magick'

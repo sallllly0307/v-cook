@@ -30,8 +30,14 @@ class RecipesController < ApplicationController
 
     @recipe.save
 
+    top_image = params[:top_image]
+    @recipe.top_image_name = "#{@recipe.id}.png"
+    File.binwrite("public/recipe_top_images/#{@recipe.top_image_name}", top_image.read)
+
+    @recipe.save
+
     #zipメソッドで複数の配列から同時に変数を取り出している
-    params[:name].zip(params[:quantity], params[:step]).each do |name, quantity, step|
+    params[:name].zip(params[:quantity], params[:step], params[:step_image]).each do |name, quantity, step, step_image|
       ingredient = Ingredient.new(
           recipe_id: @recipe.id,
           name: name,
@@ -43,6 +49,13 @@ class RecipesController < ApplicationController
           step: step
       )
       steps.save
+
+      if step_image
+        steps.step_image = "#{steps.id}.png"
+        File.binwrite("public/step_images/#{steps.step_image}", step_image.read)
+        steps.save
+      end
+
     end
 
     #応急処置　ifの条件をキレイにする必要がある
